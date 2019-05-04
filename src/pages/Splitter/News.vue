@@ -1,6 +1,7 @@
 <template>
     <ClientOnly>
         <v-ons-page>
+            <CustomToolbar title="News" :action="toggleMenu"></CustomToolbar>
             <p style="text-align: center">
                 Some news here.
             </p>
@@ -9,8 +10,11 @@
 </template>
 
 <script>
+    import CustomToolbar from "../../components/CustomToolbar";
     export default {
-        name: "News"
+        name: "News",
+        components: {CustomToolbar},
+        props: ['toggleMenu'],
     }
 </script>
 
