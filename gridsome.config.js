@@ -6,5 +6,12 @@
 
 module.exports = {
   siteName: 'Gridsome Onsen Demo',
-  plugins: []
+  plugins: [
+    {
+      use: '@gridsome/source-faker',
+      options: {
+        numNodes: 100
+      }
+    }
+  ]
 }
