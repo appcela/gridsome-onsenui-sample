@@ -8,9 +8,27 @@
                 This is the first page
                 <v-ons-button @click="push">Push Page 2</v-ons-button>
             </p>
+            <v-ons-list>
+                <v-ons-list-item v-for="edge in $static.allFaker.edges" :key="edge.node.id">{{edge.node.title}}</v-ons-list-item>
+            </v-ons-list>
         </v-ons-page>
     </ClientOnly>
 </template>
+
+<static-query>
+query Fakers {
+    allFaker(perPage: 10) {
+        edges {
+            node {
+                id,
+                author,
+                thumbnail,
+                title
+            }
+        }
+    }
+}
+</static-query>
 
 <script>
     import Page2 from './Page2';
