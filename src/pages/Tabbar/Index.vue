@@ -54,7 +54,10 @@
         },
         methods: {
           md() {
-              return this.$ons.platform.isAndroid();
+              if (typeof window !== 'undefined') {
+                  return this.$ons.platform.isAndroid();
+              }
+              return true;
           }
         },
         computed: {
