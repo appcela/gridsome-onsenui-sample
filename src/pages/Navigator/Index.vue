@@ -12,6 +12,9 @@
 
     export default {
         name: "Navigator",
+        metaInfo: {
+          title: 'Navigator'
+        },
         data() {
             return {
                 pageStack: [Page1]

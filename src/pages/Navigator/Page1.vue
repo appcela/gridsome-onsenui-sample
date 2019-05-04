@@ -14,11 +14,13 @@
 
 <script>
     import Page2 from './Page2';
-    import Blogs from "../components/Blogs";
 
     export default {
         name: "Page1",
-        components: {Page2, Blogs},
+        metaInfo: {
+            title: 'Page 1'
+        },
+        components: {Page2},
         methods: {
             push() {
                 this.$emit('push-page', Page2);

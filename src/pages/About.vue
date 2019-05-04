@@ -12,6 +12,8 @@
           </v-ons-button>
         </p>
 
+        <blogs></blogs>
+
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error doloremque omnis animi, eligendi magni a voluptatum, vitae, consequuntur rerum illum odit fugit assumenda rem dolores inventore iste reprehenderit maxime! Iusto.</p>
       </v-ons-page>
     </ClientOnly>
@@ -19,7 +21,9 @@
 </template>
 
 <script>
+import Blogs from "../components/Blogs";
 export default {
+  components: {Blogs},
   metaInfo: {
     title: 'About us'
   }

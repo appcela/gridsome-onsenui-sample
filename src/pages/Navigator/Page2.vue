@@ -14,7 +14,10 @@
 
 <script>
     export default {
-        name: "Page2"
+        name: "Page2",
+        metaInfo: {
+            title: 'Page 2'
+        },
     }
 </script>
 
