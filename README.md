@@ -52,3 +52,60 @@ Bind the Onsen Vue component inside `<ClientOnly></ClientOnly>` tag and import l
 ```
 
 See [Without SSR support](https://gridsome.org/docs/assets-scripts#without-ssr-support) for more info.
+
+### Static Query
+
+Even though Onsen UI pages cannot be rendered on the server side (no SSR support) due to DOM manipulation required in 
+the browser. We can still use [static query](https://gridsome.org/docs/querying-data#query-data-in-components) to save 
+the round trip for loading the initial data for the page.
+
+Gridsome will query the data source at build time and save the data in JSON format in the generated js files. 
+
+This way, even though the page itself cannot be pre-rendered on the server side, at least the initial data it needs 
+can be pre-loaded on the server side, which is still beneficial for boosting the web app performance.
+
+```
+<template>
+    <ClientOnly>
+        <v-ons-page>
+            ...
+            <v-ons-list>
+                <v-ons-list-item v-for="edge in $static.allFaker.edges" :key="edge.node.id">{{edge.node.title}}</v-ons-list-item>
+            </v-ons-list>
+        </v-ons-page>
+    </ClientOnly>
+</template>
+
+<static-query>
+query Fakers {
+    allFaker(perPage: 10) {
+        edges {
+            node {
+                id,
+                author,
+                thumbnail,
+                title
+            }
+        }
+    }
+}
+</static-query>
+```
+
+# Onsen Vue Demo
+
+After cloning this repository, launch the demo site by running the following command in your 
+cloned directory,
+
+```
+gridsome develop
+``` 
+
+Navigator Demo
+- http://localhost:8080/navigator
+
+Splitter Demo
+- http://localhost:8080/splitter
+
+Tabbar Demo
+- http://localhost:8080/tabbar
