@@ -5,6 +5,7 @@ import DefaultLayout from '~/layouts/Default.vue'
 // import onsen ui css
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
+import 'setimmediate';
 
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
