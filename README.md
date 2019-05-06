@@ -53,6 +53,33 @@ Bind the Onsen Vue component inside `<ClientOnly></ClientOnly>` tag and import l
 
 See [Without SSR support](https://gridsome.org/docs/assets-scripts#without-ssr-support) for more info.
 
+### "Uncaught ReferenceError: setImmediate is not defined" Fix
+
+After generating the site with the following command, 
+
+```
+gridsome build
+```
+
+You may run into the following error with your deployed site,
+
+- Uncaught ReferenceError: setImmediate is not defined
+
+To fix this error, we'll need to install the [setImmediate.js](https://github.com/yuzujs/setImmediate#readme) package,
+
+```
+yarn add setimmediate
+```
+
+And import it in your `src/main.js` file,
+
+```
+import 'setimmediate';
+```
+
+Note: This fix is already included in the sample project.
+
+
 ### Static Query
 
 Even though Onsen UI pages cannot be rendered on the server side (no SSR support) due to DOM manipulation required in 
