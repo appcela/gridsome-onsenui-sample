@@ -233,3 +233,8 @@ Here's an example to fetch all Star Wars characters from the SWAPI API.
 You can find this under Navigator Demo > Page 2
 
 - http://localhost:8080/navigator
+
+## References
+
+- https://github.com/gridsome/gridsome/issues/80
+- https://gist.github.com/jakedohm/860f2dadbf00f0d96c8f8d773c476351
