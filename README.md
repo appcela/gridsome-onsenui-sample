@@ -136,3 +136,100 @@ Splitter Demo
 
 Tabbar Demo
 - http://localhost:8080/tabbar
+
+# Misc
+
+## Fetch Data from GraphQL Source Example
+
+There's no [Gridsome plugins](https://gridsome.org/plugins) to connect to remote GraphQL schema yet. The only documented use case is for connecting to remote REST API source (see [Add data from APIs](https://gridsome.org/docs/fetching-data#add-data-from-apis)).
+
+I'll use the SWAPI (Star Wars API) GraphQL API to demonstrate how to import the remote GraphQL schema into Gridsome for full data access.
+
+### SWAPI
+
+- [SWAPI GraphQL Console](https://swapi.graph.cool/)
+- SWAPI GraphQL API Endpoint = https://api.graphcms.com/simple/v1/swapi 
+- [The Star Wars API Just Got a GraphQL Makeover](https://graphcms.com/blog/the-star-wars-api-just-got-a-makeover/)  
+
+### Instructions
+
+#### 1. Add GraphQL client libraries
+
+Add these supporting libraries for connecting to remote GraphQL schema. 
+```
+yarn add node-fetch apollo-link-context apollo-link-http
+```
+
+### 2. Add remote GraphQL source glue code
+
+*gridsome.server.js* 
+
+Add the following glue code.
+
+```
+const { setContext } = require('apollo-link-context');
+const { HttpLink } = require('apollo-link-http');
+const { introspectSchema, makeRemoteExecutableSchema } = require('graphql-tools');
+const fetch = require('node-fetch');
+
+module.exports = function (api) {
+  // import remote GraphQL schema into Gridsome
+  api.createSchema(async function(graphql) {
+    const http = new HttpLink({
+      uri: 'https://api.graphcms.com/simple/v1/swapi ', // SWAPI - The Star Wars API for GraphQL
+      fetch
+    });
+
+    const link = setContext((request, previousContext) => ({
+      headers: {
+        // no authorization for SWAPI
+        // Authorization: `Bearer JSmxi5ocIhjKGENvgK66TrlqoylAPy8ZeAckiyo-4txKkYhdKSfLlPXLnxoghZm3`
+      }
+    })).concat(http);
+
+    const schema = await introspectSchema(link);
+    const executableSchema = await makeRemoteExecutableSchema({
+      schema: schema,
+      link
+    });
+
+    return executableSchema;
+  });
+
+  api.loadSource(store => {
+    // Use the Data store API here: https://gridsome.org/docs/data-store-api
+  })
+}
+
+
+```
+
+### 3. Fetch data from remote GraphQL source
+
+Here's an example to fetch all Star Wars characters from the SWAPI API.
+
+```
+<template>
+    <ClientOnly>
+        <v-ons-page>
+            ...
+            <v-ons-list>
+                <v-ons-list-item v-for="person in $static.allPersons" :key="person.id">{{person.name}}</v-ons-list-item>
+            </v-ons-list>
+        </v-ons-page>
+    </ClientOnly>
+</template>
+
+<static-query>
+    query {
+        allPersons {
+            id,
+            name
+        }
+    }
+</static-query>
+```
+
+You can find this under Navigator Demo > Page 2
+
+- http://localhost:8080/navigator
