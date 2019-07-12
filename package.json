@@ -10,7 +10,7 @@
     "@gridsome/source-faker": "^0.2.0",
     "apollo-link-context": "^1.0.17",
     "apollo-link-http": "^1.5.14",
-    "gridsome": "^0.5.0",
+    "gridsome": "^0.6.6",
     "node-fetch": "^2.6.0",
     "onsenui": "^2.10.8",
     "setimmediate": "^1.0.5",
