@@ -11,7 +11,7 @@
     "apollo-link-context": "^1.0.17",
     "apollo-link-http": "^1.5.14",
     "gridsome": "^0.6.6",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "lodash.template": "^4.5.0",
     "node-fetch": "^2.6.0",
     "onsenui": "^2.10.8",
